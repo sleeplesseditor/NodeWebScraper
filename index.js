@@ -2,11 +2,13 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 const Table = require('cli-table');
 
+//Table Creation
 let table = new Table({
     head: ['username', '❤️', 'challenges'],
     colWidths: [15, 5, 10]
 })
 
+//Data Source
 const options = {
     url: `https://forum.freecodecamp.org/directory_items?period=week&order=likes_received&_=1518604435748`,
     json: true
@@ -25,6 +27,7 @@ rp(options)
         console.log(err);
     });
 
+    //Push Data from Source URL to Array
     function getChallengesCompletedAndPushToUserArray(userData) {
         var i = 0;
         function next() {
@@ -49,6 +52,7 @@ rp(options)
         return next();
     };
 
+    //Print Data into Table
     function printData() {
         console.log("✅");
         console.log(table.toString());
